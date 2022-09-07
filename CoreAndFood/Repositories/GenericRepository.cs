@@ -1,4 +1,5 @@
 ﻿using CoreAndFood.Data.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace CoreAndFood.Repositories
 {
@@ -27,6 +28,10 @@ namespace CoreAndFood.Repositories
         public void TGet(int parameter)
         {
             db.Set<T>().Find(parameter);
+        }
+        public List<T> TList(string parameter)
+        {
+            return db.Set<T>().Include(parameter).ToList();
         }
     }
 }

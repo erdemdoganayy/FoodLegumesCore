@@ -1,0 +1,45 @@
+﻿@model List<CoreAndFood.Data.Models.Category>
+@{
+    ViewData["Title"] = "FoodAdd";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1 style="padding:1rem; color:white; background-color:#343A40; width:100%; height:auto; text-align:center; margin-top:1rem; font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif">Category Add Page</h1>
+<div class="container">
+    <form method="post">
+        <div class="form-group mt-3">
+            <label for="exampleInputEmail1">Food Name</label>
+            <input type="text" class="form-control" name="Name" id="exampleInputEmail1" />
+        </div>
+        <div class="form-group mt-3">
+            <label for="exampleInputEmail1">Food Description</label>
+            <input type="text" class="form-control" name="Description" id="exampleInputEmail1" />
+        </div>
+        <div class="form-group mt-3">
+            <label for="exampleInputEmail1">Food Price</label>
+            <input type="text" class="form-control" name="Price" id="exampleInputEmail1" />
+        </div>
+        <div class="form-group mt-3">
+            <label for="exampleInputEmail1">Food Stock</label>
+            <input type="text" class="form-control" name="Stock" id="exampleInputEmail1" />
+        </div>
+        <div class="form-group mt-3">
+            <label for="exampleInputEmail1">Food Image Url</label>
+            <input type="text" class="form-control" name="ImageUrl" id="exampleInputEmail1" />
+        </div>
+
+        <div class="form-group mt-3">
+            <label for="exampleInputEmail1">Category Name</label>
+            <select class="form-control" id="exampleSelect" name="CategoryID">
+                @foreach (var item in Model)
+                {
+                    <option value="@item.Id">@item.Name</option>
+                }
+            </select>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn-success btn">Save</button>
+        </div>
+    </form>
+</div>
+
