@@ -1,6 +1,8 @@
 ﻿using CoreAndFood.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using CoreAndFood.Data.Models;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using X.PagedList;
 
 namespace CoreAndFood.Controllers
 {
@@ -8,14 +10,14 @@ namespace CoreAndFood.Controllers
     {
         FoodRepository foodRepository = new FoodRepository();
         CategoryRepository categoryRepository = new CategoryRepository();
-        public IActionResult Index()
+        public IActionResult Index(int page = 1)
         {
-            return View(foodRepository.TList("Category"));
+            return View(foodRepository.TList("Category").ToPagedList(page,4));
         }
         [HttpGet]
         public IActionResult FoodAdd()
         {
-          var result =  categoryRepository.TList();
+            var result = categoryRepository.TList();
             return View(result);
         }
         [HttpPost]
@@ -26,11 +28,20 @@ namespace CoreAndFood.Controllers
         }
         public IActionResult FoodDelete(int Id)
         {
-            foodRepository.TDelete(new Food { Id = Id});
+            foodRepository.TDelete(new Food { Id = Id });
             return RedirectToAction("Index", "Food");
         }
         public IActionResult FoodGet(int Id)
         {
+
+            List<SelectListItem> FoodCategory = (from x in categoryRepository.TList().Where(x => x.Status == true)
+                                                 select new SelectListItem
+                                                 {
+                                                     Text = x.Name,
+                                                     Value = x.Id.ToString()
+                                                 }).ToList();
+
+
             var FoodInfo = foodRepository.TGet(Id);
             Food food = new Food()
             {
@@ -42,8 +53,14 @@ namespace CoreAndFood.Controllers
                 Price = FoodInfo.Price,
                 Stock = FoodInfo.Stock
             };
-            ViewBag.FoodCategory = categoryRepository.TList();
+            ViewBag.FoodCategory = FoodCategory;
             return View(FoodInfo);
+        }
+
+        public IActionResult FoodUpdate(Food food)
+        {
+            foodRepository.TUpdate(food);
+            return RedirectToAction("Index","Food");
         }
     }
 }

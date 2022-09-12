@@ -1,4 +1,7 @@
-﻿@model List<CoreAndFood.Data.Models.Food>
+﻿@using X.PagedList.Web.Common;
+@using X.PagedList.Mvc.Core;
+@using X.PagedList;
+@model IPagedList<CoreAndFood.Data.Models.Food>
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -37,6 +40,12 @@
 
         </tbody>
     </table>
+    @Html.PagedListPager((IPagedList)Model, page =>
+    Url.Action("Index", new { page = page }),
+    new PagedListRenderOptions {
+    LiElementClasses = new string[] { "page-item" },
+    PageClasses = new string[] { "page-link" }
+    })
     <a style="color:#FFF" class="btn-info btn" href="/Food/FoodAdd/">New Food</a>
 </div>
 
