@@ -25,9 +25,9 @@ namespace CoreAndFood.Repositories
             db.Set<T>().Remove(parameter);
             db.SaveChanges();
         }
-        public void TGet(int parameter)
+        public T TGet(int parameter)
         {
-            db.Set<T>().Find(parameter);
+           return db.Set<T>().Find(parameter);
         }
         public List<T> TList(string parameter)
         {

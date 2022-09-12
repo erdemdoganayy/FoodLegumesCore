@@ -1,0 +1,25 @@
+﻿@model CoreAndFood.Data.Models.Category
+@{
+    ViewData["Title"] = "CategoryGet";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm("CategoryUpdate", "Category", FormMethod.Post))
+{
+    <h1 style="border-radius:1rem; padding:1rem; color:white; background-color:#343A40; width:100%; height:auto; text-align:center; margin-top:1rem; font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif">Category Update Page</h1>
+    <div class="form-group mt-3">
+        <label for="exampleInputEmail1">Category Name</label>
+        @Html.TextBoxFor(x => x.Name, new { @class = "form-control"})
+    </div>
+    <div class="form-group mt-3">
+        <label for="exampleInputEmail1">Category Description</label>
+        @Html.TextBoxFor(x => x.Description, new { @class = "form-control"})
+    </div>
+    <div class="form-group mt-3">
+        @Html.TextBoxFor(x => x.Id, new { @class = "form-control"})
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn-warning btn">Save</button>
+    </div>
+
+}
