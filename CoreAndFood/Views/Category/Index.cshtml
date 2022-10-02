@@ -4,6 +4,13 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@using (Html.BeginForm())
+{
+  <p>
+       Category Name : @Html.TextBox("p")
+   <input type="submit" value="Search" class="btn btn-info mb-2" />
+  </p>
+}
 <div class="container">
     <table class="table">
         <caption>List of Category</caption>

@@ -1,0 +1,11 @@
+﻿@model IEnumerable<CoreAndFood.Data.Models.Category>
+
+
+<div class="collapse navbar-collapse px-1" id="bs-megadropdown-tabs">
+    <ul class="nav navbar-nav nav_1">
+        @foreach (var item in Model)
+        {
+            <li><a href="/Home/CategoryDetails/@item.Id">@item.Name</a></li>
+        }
+    </ul>
+</div>
